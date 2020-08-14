@@ -1,0 +1,56 @@
+/*
+input:
+6 4
+give me one grand today night
+give one grand today
+
+output:Yes
+
+6 5
+two times three is not four
+two times two is four
+
+No
+
+*/
+
+void checkMagazine(vector<string> magazine, vector<string> note)
+{
+    int flag=1;
+    unordered_map<string,int> _mag;
+    int s= magazine.size();
+
+    for(int i=0;i<s;i++)
+    {
+        if(_mag.find(magazine[i])!=_mag.end())
+        {
+            int cnt=_mag[magazine[i]]+1;
+            _mag[magazine[i]]=cnt;
+        }
+        else{
+            _mag.insert({magazine[i],1});
+        }
+    }
+
+    int ns=note.size();
+    for(int i=0;i<ns;i++)
+    {
+        if(_mag.find(note[i])==_mag.end())
+        {
+            flag=0;
+            break;
+        }
+        int cnt=_mag[note[i]];
+        if(cnt==0)
+        {
+            flag=0;
+            break;
+        }
+        _mag[note[i]]=cnt-1;
+    }
+    if(flag==1)
+        cout<<"Yes";
+    else
+        cout<<"No";
+
+}
